@@ -1,0 +1,16 @@
+table {
+  min-width: 70vw;
+}
+
+td.mat-cell {
+  font-size: 14pt;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+.icons {
+  display: flex;
+  justify-content: flex-end;
+}

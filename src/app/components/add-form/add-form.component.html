@@ -1,0 +1,14 @@
+<form name="add-item">
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      placeholder="New Item"
+      autocomplete="off"
+      [(ngModel)]="text"
+      [ngModelOptions]="{ standalone: true }"
+    />
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" (click)="onAddClick()">Add</button>
+</form>

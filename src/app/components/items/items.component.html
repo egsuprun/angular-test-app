@@ -1,0 +1,7 @@
+<div class="items">
+  <app-add-form (onAddItem)="onAdd($event)"></app-add-form>
+  <app-items-table
+    [columns]="['name', 'actions']"
+    [event]="addedItemSubject.asObservable()"
+  ></app-items-table>
+</div>

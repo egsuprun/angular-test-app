@@ -1,0 +1,14 @@
+form[name="add-item"] {
+  min-width: 70vw;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14pt;
+}
+
+mat-form-field {
+  width: 90%;
+}
+
+button {
+  height: 6vh;
+}
