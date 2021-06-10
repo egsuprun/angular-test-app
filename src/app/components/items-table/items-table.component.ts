@@ -67,13 +67,6 @@ export class ItemsTableComponent implements OnInit {
       );
   }
 
-  onAddedItem($event: Item) {
-    const element: Item = $event;
-    const data = [...this.dataSource];
-    data.push(element);
-    this.dataSource = data;
-  }
-
   moveItem(element: Item, isTop: boolean) {
     const tempData: Item[] = [...this.dataSource];
     const idx: number = tempData.indexOf(element);
