@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ItemService } from '../../services/item.service';
-import { Item } from '../../interfaces/item.interface';
-import { Subject } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {ItemService} from '../../services/item.service';
+import {Item} from '../../interfaces/item.interface';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-items',
@@ -21,8 +21,7 @@ export class ItemsComponent implements OnInit {
   }
 
   onAdd(element: Item) {
-    this.itemService
-      .addItem(element)
-      .subscribe((item) => this.emitEventToChild(item));
+    this.itemService.addItem(element);
+    this.emitEventToChild(element);
   }
 }

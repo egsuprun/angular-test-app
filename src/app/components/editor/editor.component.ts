@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit {
+  previewText: string = 'Preview';
+  previewLink: string = '/preview';
+
   constructor() {}
 
   ngOnInit(): void {}

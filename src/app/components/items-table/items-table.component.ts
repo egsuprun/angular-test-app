@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ItemService } from '../../services/item.service';
-import { Item } from '../../interfaces/item.interface';
-import { Sort } from '@angular/material/sort';
-import { Observable } from 'rxjs';
+import {Component, OnInit, Input} from '@angular/core';
+import {ItemService} from '../../services/item.service';
+import {Item} from '../../interfaces/item.interface';
+import {Sort} from '@angular/material/sort';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-items-table',
@@ -18,11 +18,9 @@ export class ItemsTableComponent implements OnInit {
   constructor(private itemService: ItemService) {}
 
   ngOnInit(): void {
-    this.itemService.getItems().subscribe((items) => (this.dataSource = items));
-    this.event.subscribe((item) => {
-      const data = [...this.dataSource];
-      data.push(item);
-      this.dataSource = data;
+    this.dataSource = this.itemService.getItems();
+    this.event.subscribe(() => {
+      this.dataSource = [...this.itemService.getItems()];
     });
   }
 
@@ -43,28 +41,31 @@ export class ItemsTableComponent implements OnInit {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
+  findMaxId(): number {
+    const tmp = this.dataSource.sort((a: Item, b: Item) => a.id - b.id);
+    return tmp[tmp.length - 1].id;
+  }
+
   onCopy(element: Item) {
     const item: Item = {
       name: element.name,
       date: element.date,
+      id: this.findMaxId() + 1
     };
 
-    this.itemService.copyItem(item).subscribe((item) => {
-      const temp: Item[] = this.dataSource.slice();
-      temp.push(item);
-      this.dataSource = temp;
-    });
+    this.itemService.copyItem(item);
+    this.dataSource = [...this.itemService.getItems()];
+    console.log(this.dataSource);
+
   }
 
   onDelete(element: Item) {
-    this.itemService
-      .deleteItem(element)
-      .subscribe(
-        () =>
-          (this.dataSource = this.dataSource.filter(
-            (item) => item.id != element.id
-          ))
-      );
+    this.itemService.deleteItem(element);
+
+    this.dataSource = this.dataSource.filter(
+      (item) => item.id != element.id
+    )
+
   }
 
   moveItem(element: Item, isTop: boolean) {
